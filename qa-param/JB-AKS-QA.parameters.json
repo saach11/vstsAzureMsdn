@@ -1,0 +1,48 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "resourceName": {
+            "value": "qaWeuAksClts"
+        },
+		"location": {
+            "value": "West Europe"
+        },
+        "dnsPrefix": {
+            "value": "qaweuaksclts"
+        },
+        "agentCount": {
+            "value": "3"
+        },
+        "agentVMSize": {
+            "value": "Standard_D2_v2"
+        },
+		"managementResourceName": {
+            "value": "qaWeuMgtRg"
+        },
+		"virtualNetworkName": {
+            "value": "qaWeuVnet"
+        },
+		"workspaceRegion": {
+            "value": "West Europe"
+        },
+		"workspaceName": {
+            "value": "qaWeuOmsWspx"
+        },
+		"monitoringResourceGroup": {
+            "value": "qaWeuMonRg"
+        },
+		"serviceCidr": {
+            "value": "10.202.0.0/24"
+        },
+		"dnsServiceIp": {
+            "value": "10.202.0.10"
+        },
+        "servicePrincipalClientId": {
+            "value": "d8de4a84-8a55-47a3-9f4b-0402fe61685e"
+        },
+        "servicePrincipalClientSecret": {
+            "value": "cd07f12b-53e6-48bd-a867-78a32bb54961"
+        }
+    }
+}
