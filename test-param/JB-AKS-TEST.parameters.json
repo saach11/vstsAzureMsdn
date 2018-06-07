@@ -18,7 +18,7 @@
             "value": "Standard_D2_v2"
         },
 		"managementResourceName": {
-            "value": "testWeuAksRg"
+            "value": "testWeuMgtRg"
         },
 		"virtualNetworkName": {
             "value": "testWeuVnet"
@@ -27,10 +27,10 @@
             "value": "West Europe"
         },
 		"workspaceName": {
-            "value": "testWeuOmsWspx"
+            "value": "testWeuOmsWspy"
         },
 		"monitoringResourceGroup": {
-            "value": "testWeuAksRg"
+            "value": "testWeuMonRg"
         },
 		"serviceCidr": {
             "value": "10.203.0.0/24"
