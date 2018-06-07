@@ -36,7 +36,7 @@
 	"variables": {
 		"enableDdosProtection": false,
 		"subnetNameKub": "kubPrivSn",
-		"subnetNameDmz": "dmzPrivSn",
+		"subnetNameDmz": "dmzPrivSn"
     },
     "resources": [
         {
