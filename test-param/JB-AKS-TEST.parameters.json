@@ -30,7 +30,7 @@
             "value": "testWeuOmsWspx"
         },
 		"monitoringResourceGroup": {
-            "value": "testWeuMonRg"
+            "value": "testWeuAksRg"
         },
 		"serviceCidr": {
             "value": "10.203.0.0/24"
