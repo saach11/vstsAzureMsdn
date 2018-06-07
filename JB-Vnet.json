@@ -1,120 +1,66 @@
 {
-    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-		"environment": {
+		"name": {
             "type": "string",
-			"defaultValue": "Dev",
             "metadata": {
-                "description": "Environment name."
-            },
-			"allowedValues": [
-				"Dev",
-				"QA",
-				"PreProd"
-			]
+                "description": "VNet name"
+            }
+        },
+		"location": {
+            "type": "string",
+            "metadata": {
+                "description": "The location of virtual network"
+            }
+        },
+		"addressPrefix": {
+            "type": "string",
+            "metadata": {
+                "description": "Address prefix"
+            }
+        },
+		"subnetAddressPrefixKub": {
+            "type": "string",
+            "metadata": {
+                "description": "Subnet prefix for Kubernetes nodes"
+            }
+        },
+		"subnetAddressPrefixDmz": {
+            "type": "string",
+            "metadata": {
+                "description": "Subnet prefix for DMZ"
+            }
         }
     },
 	"variables": {
-		"nameDev": "devWeuVnet",
-		"nameQa": "qaWeuVnet",
-		"namePreProd": "preProdWeuVnet",
-		"location": "West Europe",
 		"enableDdosProtection": false,
-		"addressPrefixDev": "10.3.0.0/19",
-		"addressPrefixQa": "10.2.0.0/19",
-		"addressPrefixPreProd": "10.1.0.0/19",
 		"subnetNameKub": "kubPrivSn",
 		"subnetNameDmz": "dmzPrivSn",
-		"subnetAddressPrefixDevKub": "10.3.0.0/23",
-		"subnetAddressPrefixQaKub": "10.2.0.0/23",
-		"subnetAddressPrefixPreProdKub": "10.1.0.0/23",
-		"subnetAddressPrefixDevDmz": "10.3.9.0/28",
-		"subnetAddressPrefixQaDmz": "10.2.9.0/28",
-		"subnetAddressPrefixPreProdDmz": "10.1.9.0/28"
     },
     "resources": [
         {
             "apiVersion": "2018-02-01",
-            "name": "[variables('nameDev')]",
+            "name": "[parameters('name')]",
             "type": "Microsoft.Network/virtualNetworks",
-            "location": "[variables('location')]",
-			"condition": "[equals(parameters('environment'),'Dev')]",
+            "location": "[parameters('location')]",
             "properties": {
                 "addressSpace": {
                     "addressPrefixes": [
-                        "[variables('addressPrefixDev')]"
+                        "[parameters('addressPrefix')]"
                     ]
                 },
                 "subnets": [
                     {
                         "name": "[variables('subnetNameKub')]",
                         "properties": {
-                            "addressPrefix": "[variables('subnetAddressPrefixDevKub')]"
+                            "addressPrefix": "[parameters('subnetAddressPrefixKub')]"
                         }
                     },
 					{
                         "name": "[variables('subnetNameDmz')]",
                         "properties": {
-                            "addressPrefix": "[variables('subnetAddressPrefixDevDmz')]"
-                        }
-                    }
-                ],
-                "enableDdosProtection": "[variables('enableDdosProtection')]"
-            }
-        },
-		{
-            "apiVersion": "2018-02-01",
-            "name": "[variables('nameQa')]",
-            "type": "Microsoft.Network/virtualNetworks",
-            "location": "[variables('location')]",
-			"condition": "[equals(parameters('environment'),'QA')]",
-            "properties": {
-                "addressSpace": {
-                    "addressPrefixes": [
-                        "[variables('addressPrefixQa')]"
-                    ]
-                },
-                "subnets": [
-                    {
-                        "name": "[variables('subnetNameKub')]",
-                        "properties": {
-                            "addressPrefix": "[variables('subnetAddressPrefixQaKub')]"
-                        }
-                    },
-					{
-                        "name": "[variables('subnetNameDmz')]",
-                        "properties": {
-                            "addressPrefix": "[variables('subnetAddressPrefixQaDmz')]"
-                        }
-                    }
-                ],
-                "enableDdosProtection": "[variables('enableDdosProtection')]"
-            }
-        },
-		{
-            "apiVersion": "2018-02-01",
-            "name": "[variables('namePreProd')]",
-            "type": "Microsoft.Network/virtualNetworks",
-            "location": "[variables('location')]",
-			"condition": "[equals(parameters('environment'),'PreProd')]",
-            "properties": {
-                "addressSpace": {
-                    "addressPrefixes": [
-                        "[variables('addressPrefixPreProd')]"
-                    ]
-                },
-                "subnets": [
-                    {
-                        "name": "[variables('subnetNameKub')]",
-                        "properties": {
-                            "addressPrefix": "[variables('subnetAddressPrefixPreProdKub')]"
-                        }
-                    },
-					{
-                        "name": "[variables('subnetNameDmz')]",
-                        "properties": {
-                            "addressPrefix": "[variables('subnetAddressPrefixPreProdDmz')]"
+                            "addressPrefix": "[parameters('subnetAddressPrefixDmz')]"
                         }
                     }
                 ],
