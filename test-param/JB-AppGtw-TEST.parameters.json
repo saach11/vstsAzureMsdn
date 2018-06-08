@@ -1,0 +1,36 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+		"applicationGatewayName": {
+            "value": "testWeuAppGtw"
+        },
+		"location": {
+            "value": "West Europe"
+        },
+		"skuSize": {
+            "value": "WAF_Medium"
+        },
+		"capacity": {
+            "value": 2
+        },
+		"wafMode": {
+            "value": "Detection"
+        },		
+		"frontEndPort": {
+            "value": 443
+        },
+		"domainNameLabel": {
+            "value": "testjb"
+		},
+		"sslCertName": {
+            "value": "testjb"
+        },
+		"sslCertData": {
+            "value": "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"
+		},
+		"sslCertPassword": {
+            "value": "1qa2ws3eD1"
+		}
+    }
+}
