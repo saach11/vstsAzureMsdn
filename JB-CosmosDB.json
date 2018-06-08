@@ -1,0 +1,106 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2014-04-01-preview/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "name": {
+            "type": "string"
+        },
+        "location": {
+            "type": "string",
+			"allowedValues": [ 
+				"eastasia", 
+				"southeastasia", 
+				"centralus", 
+				"eastus", 
+				"eastus2", 
+				"westus", 
+				"northcentralus", 
+				"southcentralus", 
+				"northeurope", 
+				"westeurope", 
+				"japanwest", 
+				"japaneast", 
+				"brazilsouth", 
+				"australiaeast", 
+				"australiasoutheast", 
+				"southindia", 
+				"centralindia", 
+				"westindia", 
+				"canadacentral", 
+				"canadaeast", 
+				"uksouth", 
+				"ukwest", 
+				"westcentralus", 
+				"westus2", 
+				"koreacentral", 
+				"koreasouth" 
+			],
+			"defaultValue": "westeurope"
+        },
+        "pairedLocation": {
+            "type": "string",
+			"allowedValues": [ 
+				"eastasia", 
+				"southeastasia", 
+				"centralus", 
+				"eastus", 
+				"eastus2", 
+				"westus", 
+				"northcentralus", 
+				"southcentralus", 
+				"northeurope", 
+				"westeurope", 
+				"japanwest", 
+				"japaneast", 
+				"brazilsouth", 
+				"australiaeast", 
+				"australiasoutheast", 
+				"southindia", 
+				"centralindia", 
+				"westindia", 
+				"canadacentral", 
+				"canadaeast", 
+				"uksouth", 
+				"ukwest", 
+				"westcentralus", 
+				"westus2", 
+				"koreacentral", 
+				"koreasouth" 
+			],
+			"defaultValue": "northeurope"
+        }
+    },
+	"variables": {
+		"defaultExperience": "DocumentDB"
+    },
+    "resources": [
+        {
+            "apiVersion": "2015-04-08",
+            "kind": "GlobalDocumentDB",
+            "type": "Microsoft.DocumentDb/databaseAccounts",
+            "name": "[parameters('name')]",
+            "location": "[parameters('location')]",
+            "properties": {
+                "databaseAccountOfferType": "Standard",
+                "locations": [
+                    {
+                        "id": "[concat(parameters('name'), '-', parameters('location'))]",
+                        "failoverPriority": 0,
+                        "locationName": "[parameters('location')]"
+                    },
+                    {
+                        "id": "[concat(parameters('name'), '-', parameters('pairedLocation'))]",
+                        "failoverPriority": 1,
+                        "locationName": "[parameters('pairedLocation')]"
+                    }
+                ],
+                "isVirtualNetworkFilterEnabled": false,
+                "virtualNetworkRules": [],
+                "dependsOn": []
+            },
+            "tags": {
+                "defaultExperience": "[variables('defaultExperience')]"
+            }
+        }
+    ]
+}
